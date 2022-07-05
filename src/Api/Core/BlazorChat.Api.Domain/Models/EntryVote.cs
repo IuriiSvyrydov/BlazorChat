@@ -1,4 +1,4 @@
-﻿using BlazorChat.Common.ViewModels;
+﻿using BlazorChat.Common.Models;
 
 namespace BlazorChat.Api.Domain.Models;
 

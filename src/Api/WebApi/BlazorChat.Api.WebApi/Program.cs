@@ -1,4 +1,7 @@
+using BlazorChat.Api.Application.Extentions;
 using BlazorChat.Api.Infrastructure.Persistence.Extensions;
+using BlazorChat.Api.WebApi.Extensions;
+using FluentValidation.AspNetCore;
 
 namespace BlazorChat.Api.WebApi
 {
@@ -8,8 +11,15 @@ namespace BlazorChat.Api.WebApi
         {
             var builder = WebApplication.CreateBuilder(args);
             builder.Services.AddDbConfiguration(builder.Configuration);
+            builder.Services.RegisterServices();
+            builder.Services.AddRegisterServices();
 
-            builder.Services.AddControllers();
+            builder.Services.AddControllers()
+                .AddJsonOptions(opt =>
+                {
+                    opt.JsonSerializerOptions.PropertyNamingPolicy = null;
+                })
+                .AddFluentValidation();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

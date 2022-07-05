@@ -1,4 +1,4 @@
-﻿namespace BlazorChat.Common.ViewModels
+﻿namespace BlazorChat.Common.Models
 {
     public enum VoteType
     {
