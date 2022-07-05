@@ -20,7 +20,7 @@ namespace BlazorChat.Api.WebApi.Controllers
         public async Task<IActionResult> Login([FromBody]LoginUserCommand user)
         {
             var res = await _mediator.Send(user);
-            return Ok(user);
+            return Ok(res);
         }
     }
 }
