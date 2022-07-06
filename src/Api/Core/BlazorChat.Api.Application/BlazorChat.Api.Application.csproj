@@ -12,7 +12,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Commands\EntryComment\" />
+    <Folder Include="Features\Commands\Entry\CreateVote\" />
+    <Folder Include="Features\Commands\DeleteFav\" />
     <Folder Include="Features\Commands\User\Create\" />
+    <Folder Include="Features\Commands\User\ChangePassword\" />
+    <Folder Include="Features\Commands\User\ComfirmEmail\" />
     <Folder Include="Features\Commands\User\Update\" />
     <Folder Include="Features\Queries\" />
     <Folder Include="Interfaces\Repositories\" />

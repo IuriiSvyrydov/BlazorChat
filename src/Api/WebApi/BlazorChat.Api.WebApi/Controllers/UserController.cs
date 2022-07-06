@@ -1,4 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using BlazorChat.Api.Application.Features.Commands.User.ComfirmEmail;
+using BlazorChat.Common.Events.User;
 using BlazorChat.Common.Models.RequestModel;
 using MediatR;
 using Microsoft.AspNetCore.Http;
@@ -8,7 +11,7 @@ namespace BlazorChat.Api.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UserController : ControllerBase
+    public class UserController : BaseController
     {
         private readonly IMediator _mediator;
 
@@ -16,9 +19,10 @@ namespace BlazorChat.Api.WebApi.Controllers
         {
             _mediator = mediator;
         }
+
         [HttpPost]
         [Route("login")]
-        public async Task<IActionResult> Login([FromBody]LoginUserCommand user)
+        public async Task<IActionResult> Login([FromBody] LoginUserCommand user)
         {
             var res = await _mediator.Send(user);
             return Ok(res);
@@ -38,5 +42,27 @@ namespace BlazorChat.Api.WebApi.Controllers
             var guid = await _mediator.Send(user);
             return Ok(guid);
         }
+
+        [HttpPost]
+        [Route("Confirm")]
+        public async Task<IActionResult> ConfirmEmail(Guid id)
+        {
+            var guid = await _mediator.Send(new ComfirmEmailCommand
+            {
+                ConfirmationId = id
+            });
+            return Ok(guid);
+        }
+
+        [HttpPost]
+        [Route("ChangePassword")]
+        public async Task<IActionResult> ChangePassword([FromBody] ChangeUserPasswordCommand command)
+        {
+            if (!command.UserId.HasValue)
+                command.UserId = UserId;
+            var guid = await _mediator.Send(command);
+            return Ok(guid);
+        }
     }
+
 }

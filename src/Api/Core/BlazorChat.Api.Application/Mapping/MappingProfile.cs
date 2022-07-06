@@ -13,6 +13,8 @@ namespace BlazorChat.Api.Application.Mapping
             CreateMap<LoginUserViewModel, User>().ReverseMap();
             CreateMap<User, CreateUserCommand>().ReverseMap();
             CreateMap<User, UpdateUserCommand>().ReverseMap();
+            CreateMap<CreateEntryCommand, Entry>().ReverseMap();
+            CreateMap<CreateEntryCommentCommand,EntryComment>().ReverseMap();
 
         }
     }
