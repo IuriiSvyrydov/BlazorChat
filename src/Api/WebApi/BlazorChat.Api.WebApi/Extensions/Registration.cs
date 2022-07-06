@@ -1,5 +1,6 @@
 ﻿using BlazorChat.Api.Application.Interfaces.Repositories;
 using BlazorChat.Api.Application.Repositories;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BlazorChat.Api.WebApi.Extensions;
 

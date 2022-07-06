@@ -1,9 +1,8 @@
-﻿
-using BlazorChat.Common.Models.RequestModel;
+﻿using BlazorChat.Common.Models.RequestModel;
 using FluentValidation;
 using FluentValidation.Validators;
 
-namespace BlazorChat.Api.Application.Features.Commands.User
+namespace BlazorChat.Api.Application.Features.Commands.User.Login
 {
     public class LoginUserCommandValidator: AbstractValidator<LoginUserCommand>
     {

@@ -11,7 +11,7 @@ using MediatR;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 
-namespace BlazorChat.Api.Application.Features.Commands.User;
+namespace BlazorChat.Api.Application.Features.Commands.User.Login;
 
 public class LoginUserCommandHandler: IRequestHandler<LoginUserCommand,LoginUserViewModel>
 {

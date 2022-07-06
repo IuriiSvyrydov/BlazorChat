@@ -2,6 +2,9 @@ using BlazorChat.Api.Application.Extentions;
 using BlazorChat.Api.Infrastructure.Persistence.Extensions;
 using BlazorChat.Api.WebApi.Extensions;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace BlazorChat.Api.WebApi
 {

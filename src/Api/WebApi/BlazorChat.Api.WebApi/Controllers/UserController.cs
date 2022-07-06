@@ -1,4 +1,5 @@
-﻿using BlazorChat.Common.Models.RequestModel;
+﻿using System.Threading.Tasks;
+using BlazorChat.Common.Models.RequestModel;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -21,6 +22,21 @@ namespace BlazorChat.Api.WebApi.Controllers
         {
             var res = await _mediator.Send(user);
             return Ok(res);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateUser([FromBody] CreateUserCommand user)
+        {
+            var guid = await _mediator.Send(user);
+            return Ok(guid);
+        }
+
+        [HttpPost]
+        [Route("Update")]
+        public async Task<IActionResult> UpdateUser([FromBody] UpdateUserCommand user)
+        {
+            var guid = await _mediator.Send(user);
+            return Ok(guid);
         }
     }
 }
