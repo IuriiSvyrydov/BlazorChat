@@ -8,7 +8,7 @@ public class Entry: BaseEntity
     public Guid CreateById { get; set; }
     public User CreateBy { get; set; }
     public ICollection<EntryComment> EntryComments { get; set; } = new HashSet<EntryComment>();
-    public ICollection<EntryVote> EntryVotes { get; set; } = new HashSet<EntryVote>();
+    public ICollection<EntryVote> EntryVotes { get; set; }= new HashSet<EntryVote>();
     public ICollection<EntryFavorite> EntryFavorites { get; set; } = new HashSet<EntryFavorite>();
 
 }

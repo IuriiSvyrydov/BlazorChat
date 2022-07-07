@@ -15,6 +15,9 @@ namespace BlazorChat.Api.Application.Mapping
             CreateMap<User, UpdateUserCommand>().ReverseMap();
             CreateMap<CreateEntryCommand, Entry>().ReverseMap();
             CreateMap<CreateEntryCommentCommand,EntryComment>().ReverseMap();
+            CreateMap<Entry, GetEntriesViewModel>()
+                .ForMember(x=>x.CommentCount,opt
+                    =>opt.MapFrom(x=>x.EntryComments.Count));
 
         }
     }
