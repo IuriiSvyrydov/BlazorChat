@@ -18,6 +18,7 @@ namespace BlazorChat.Api.Application.Mapping
             CreateMap<Entry, GetEntriesViewModel>()
                 .ForMember(x=>x.CommentCount,opt
                     =>opt.MapFrom(x=>x.EntryComments.Count));
+            CreateMap<UserDetailViewModel, User>().ReverseMap();
 
         }
     }

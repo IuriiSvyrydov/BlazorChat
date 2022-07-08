@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
+using BlazorChat.Api.Application.Features.Commands.GetUserDetail;
 using BlazorChat.Api.Application.Features.Commands.User.ComfirmEmail;
 using BlazorChat.Common.Events.User;
 using BlazorChat.Common.Models.RequestModel;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlazorChat.Api.WebApi.Controllers
@@ -18,6 +18,22 @@ namespace BlazorChat.Api.WebApi.Controllers
         public UserController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        public async Task<IActionResult> Get(Guid id)
+        {
+            var user = await _mediator.Send(new GetUserDetailQuery(id));
+            return Ok(user);
+        }
+
+        [HttpGet]
+        [Route("UserName/{userName}")]
+        public async Task<IActionResult> GetByUserName(string userName)
+        {
+            var user = _mediator.Send(new GetUserDetailQuery(Guid.Empty, userName));
+            return Ok(user);
         }
 
         [HttpPost]

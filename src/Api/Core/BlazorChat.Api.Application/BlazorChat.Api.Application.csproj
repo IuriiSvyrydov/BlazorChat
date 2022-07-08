@@ -15,12 +15,16 @@
     <Folder Include="Features\Commands\EntryComment\" />
     <Folder Include="Features\Commands\Entry\CreateVote\" />
     <Folder Include="Features\Commands\DeleteFav\" />
-    <Folder Include="Features\Commands\GetMainPageEntitites\" />
+    <Folder Include="Features\Commands\GetUserDetail\" />
+    <Folder Include="Features\Commands\GetEntriesDetail\" />
+    <Folder Include="Features\Commands\GetMyEntries\" />
+    <Folder Include="Features\Commands\SearchBySubject\" />
     <Folder Include="Features\Commands\User\Create\" />
     <Folder Include="Features\Commands\User\ChangePassword\" />
     <Folder Include="Features\Commands\User\ComfirmEmail\" />
     <Folder Include="Features\Commands\User\Update\" />
     <Folder Include="Features\Queries\GetEntries\" />
+    <Folder Include="Features\Queries\EntryComments\" />
     <Folder Include="Interfaces\Repositories\" />
   </ItemGroup>
 
