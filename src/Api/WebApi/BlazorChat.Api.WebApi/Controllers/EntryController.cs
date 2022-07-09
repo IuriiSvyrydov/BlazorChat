@@ -37,25 +37,7 @@ namespace BlazorChat.Api.WebApi.Controllers
             var entries = await _mediator.Send(new GetMainPageEntriesQuery(UserId,page,pageSize));
             return Ok(entries);
         }
-        [HttpPost]
-        [Route("CreateEntry")]
-        public async Task<IActionResult> CreateEntry([FromBody] CreateEntryCommand command)
-        {
-            if (!command.CreateById.HasValue)
-                command.CreateById = UserId;
-            var result = await _mediator.Send(command);
-            return Ok(result);
-        }
-        [HttpPost]
-        [Route("CreateEntryComment")]
-        public async Task<IActionResult> CreateEntryComment([FromBody] CreateEntryCommentCommand command)
-        {
-            if (!command.CreateById.HasValue)
-                command.CreateById = UserId;
-           
-            var result = await _mediator.Send(command);
-            return Ok(result);
-        }
+      
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(Guid id)
         {
@@ -87,6 +69,25 @@ namespace BlazorChat.Api.WebApi.Controllers
         public async Task<IActionResult> Search([FromQuery] SearchEntryQuery query)
         {
             var result = await _mediator.Send(query);
+            return Ok(result);
+        }
+        [HttpPost]
+        [Route("CreateEntry")]
+        public async Task<IActionResult> CreateEntry([FromBody] CreateEntryCommand command)
+        {
+            if (!command.CreateById.HasValue)
+                command.CreateById = UserId;
+            var result = await _mediator.Send(command);
+            return Ok(result);
+        }
+        [HttpPost]
+        [Route("CreateEntryComment")]
+        public async Task<IActionResult> CreateEntryComment([FromBody] CreateEntryCommentCommand command)
+        {
+            if (!command.CreateById.HasValue)
+                command.CreateById = UserId;
+
+            var result = await _mediator.Send(command);
             return Ok(result);
         }
     }
