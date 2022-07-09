@@ -6,5 +6,5 @@ public class LoginUserViewModel
     public string LastName { get; set; }
     public string UserName { get; set; }
     public string Token { get; set; }
-
+    public Guid Id { get; set; }
 }

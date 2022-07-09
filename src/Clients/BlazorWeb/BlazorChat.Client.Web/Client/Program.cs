@@ -1,5 +1,6 @@
 using BlazorChat.Client.Web.Infrastructure.Interfaces;
 using BlazorChat.Client.Web.Infrastructure.Services;
+using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
@@ -23,9 +24,13 @@ namespace BlazorChat.Client.Web.Client
                 return clientFactory.CreateClient("WebApiClient");
             });
             builder.Services.AddTransient<IVoteService, VoteService>();
+            builder.Services.AddTransient<IVoteService, VoteService>();
+            builder.Services.AddTransient<IFavService, FavService>();
+            builder.Services.AddTransient<IUserService, UserService>();
+            builder.Services.AddTransient<IIdentityService, IdentityService>();
 
-            builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
-
+          //  builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+          builder.Services.AddBlazoredLocalStorage();
             await builder.Build().RunAsync();
         }
     }
