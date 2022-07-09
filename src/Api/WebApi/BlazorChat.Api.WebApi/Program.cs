@@ -1,11 +1,3 @@
-using BlazorChat.Api.Application.Extentions;
-using BlazorChat.Api.Infrastructure.Persistence.Extensions;
-using BlazorChat.Api.WebApi.Extensions;
-using FluentValidation.AspNetCore;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-
 namespace BlazorChat.Api.WebApi
 {
     public class Program
@@ -25,6 +17,7 @@ namespace BlazorChat.Api.WebApi
                 .AddFluentValidation();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
+            builder.Services.ConfigureAuth(builder.Configuration);
             builder.Services.AddSwaggerGen();
             
 
@@ -37,11 +30,10 @@ namespace BlazorChat.Api.WebApi
                 app.UseSwaggerUI();
             }
 
+            app.ConfigureExceptionHandling(app.Environment.IsDevelopment());
             app.UseHttpsRedirection();
-
+            app.UseAuthentication();
             app.UseAuthorization();
-
-
             app.MapControllers();
 
             app.Run();

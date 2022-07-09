@@ -1,4 +1,5 @@
 ﻿using BlazorChat.Common;
+using BlazorChat.Common.Events.DeleteVote;
 using BlazorChat.Common.Events.EntryFav;
 using BlazorChat.Common.Infrastructure;
 using MediatR;
@@ -12,7 +13,7 @@ public class DeleteEntryVoteCommandHandler: IRequestHandler<DeleteEntryVoteComma
         QueueFactory.SendMessageToExchange(exchangeName:RabbitMQConstansts.VoteExchangeName,
                                             exchangeType:RabbitMQConstansts.DefaultExchangeType,
                                             queueName:RabbitMQConstansts.DeleteEntryVoteQueueName,
-                                            obj: new DeleteEntryFavEvent()
+                                            obj: new DeleteEntryVoteEvent()
                                             {
                                                 EntryId = request.EntryId,
                                                 CreateBy = request.UserId

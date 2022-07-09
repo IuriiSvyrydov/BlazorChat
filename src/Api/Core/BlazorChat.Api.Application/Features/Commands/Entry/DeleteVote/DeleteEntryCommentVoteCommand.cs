@@ -1,6 +1,5 @@
 ﻿using BlazorChat.Common;
 using BlazorChat.Common.Events.EntryComment;
-using BlazorChat.Common.Events.EntryFav;
 using BlazorChat.Common.Infrastructure;
 using MediatR;
 
@@ -28,7 +27,7 @@ public class DeleteEntryCommentVoteCommandHandler : IRequestHandler<DeleteEntryC
             obj: new DeleteEntryCommentVoteEvent()
             {
                 EntryCommentId = request.EntryCommentId,
-                CreateBy = request.UserId,
+                CreateBy = request.UserId
             });
         return await Task.FromResult(true);
     }

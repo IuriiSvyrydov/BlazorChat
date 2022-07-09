@@ -32,7 +32,7 @@ namespace BlazorChat.Api.WebApi.Controllers
         [Route("UserName/{userName}")]
         public async Task<IActionResult> GetByUserName(string userName)
         {
-            var user = _mediator.Send(new GetUserDetailQuery(Guid.Empty, userName));
+            var user = await _mediator.Send(new GetUserDetailQuery(Guid.Empty, userName));
             return Ok(user);
         }
 
