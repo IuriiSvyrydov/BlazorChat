@@ -20,7 +20,12 @@ namespace BlazorChat.Api.WebApi
             builder.Services.ConfigureAuth(builder.Configuration);
             builder.Services.AddSwaggerGen();
             
-
+            //CORS
+            builder.Services.AddCors(c => c.AddPolicy("DefaultPolicy", build =>
+            {
+                build.AllowAnyHeader()
+                    .AllowAnyMethod().AllowAnyOrigin();
+            }));
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -31,6 +36,7 @@ namespace BlazorChat.Api.WebApi
             }
 
             app.ConfigureExceptionHandling(app.Environment.IsDevelopment());
+            app.UseCors("DefaultPolicy");
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();

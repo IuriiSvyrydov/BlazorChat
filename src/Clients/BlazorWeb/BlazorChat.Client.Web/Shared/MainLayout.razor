@@ -1,17 +1,157 @@
-﻿@inherits LayoutComponentBase
+﻿
+@inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu />
+<div class="navbar fixed-top text-white">
+    <div class="logo">
+        <a href="/" class="bg-white">
+            <img height="29" src=""/>
+            @*TODO img*@
+        </a>
     </div>
-
-    <main>
-        <div class="top-row px-4">
-            <a href="https://docs.microsoft.com/aspnet/" target="_blank">About</a>
+    <div class="search-box">
+        <div class="input-group">
+            <div class="form-outline">
+                <input type="search"
+                       class="form-control small"
+                       @bind-value="@searchText"
+                       @bind-value:event="oninput"
+                       @onkeypress="@SearchKeyDown"
+                       @onfocusout="@OnSearchFocusOut"
+                       placeholder="Search in site"/>
+            </div>
+            <button type="button" class="btn btn-chat btn-success"
+                    @onclick="@Search"
+                    @onfocusout="@OnSearchFocusOut">
+                <i class="fa fa-search h-75"></i>
+            </button>
         </div>
+        @if (showSearchResult)
+        {
+            <ul class="list-group">
+                @foreach (var  searchItem in searchResult)
+                {
+                    <li class="list-group-item">
+                        <a @onclick="(async () => await GoEntry(searchItem.Id))">
+                            @searchItem.Subject
+                        </a>
+                    </li>
+                }
+            </ul>
+        }@*
+        <AuthorizeView>
+            <Authorized>
+                <div class="top-nav">
+                    <input type="button" class="form-control btn-success btn-chat w-auto" value="Create Entry" @onclick="@NavigateCreateEntryPage"/>
+                    <input type="button" class="form-control btn-success btn-chat w-auto" value="Me" @onclick="@NavigateMePage"/>
+                    <input type="button" class="form-control btn-success btn-chat w-auto" value="Logout" @onclick="@NavigateLogoutPage"/>
+                </div>
+            </Authorized>
+        </AuthorizeView>
+        <NotAuthorized>
+            <div class="top-nav">
+                <input type="button" class="form-control btn-success btn-chat w-auto" value="Login" @onclick="@NavigateLoginPage"/>
+            </div>
+        </NotAuthorized>
+        *@
+        <div class="sub-nav">
+            <a class="sub-nav-item active">item1</a>
+            <a class="sub-nav-item">item2</a>
+            <a class="sub-nav-item">item3</a>
+            <a class="sub-nav-item">item4</a>
+            <a class="sub-nav-item">item5</a>
+            <a class="sub-nav-item">item6</a>
+            <a class="sub-nav-item">item7</a>
+            <a class="sub-nav-item">item8</a>
 
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
+        </div>
+    </div>
+    <div class="page">
+        <div class="sidebar">
+            <h5 class="text-white text-center sidebar-heading">@EntriesSubject</h5>
+            <a class="more-data"@onclick="@RefreshEntries">refresh</a>
+            <ul class="list-group">
+                <EntriesComponent @ref="EntriesComponent"></EntriesComponent>
+            </ul>
+            @* <NavMenu/>*@
+        </div>
+        <main>
+            <div class="top-row px-4">
+
+            </div>
+
+            <article class="content px-4">
+                @Body
+            </article>
+        </main>
+    </div>
 </div>
+
+@code
+{
+    public string EntriesSubject { get; set; } = " ChatBot";
+    private EntriesComponent EntriesComponent;
+    [Inject]
+    NavigationManager NavigationManager { get; set; }
+    [Inject]
+    IEntryService EntryService { get; set; }
+
+    private string searchText;
+    private bool showSearchResult;
+    private List<SearchEntryViewModel> searchResult = new List<SearchEntryViewModel>();
+
+    private async Task RefreshEntries()
+    {
+        await EntriesComponent.RefreshList();
+    }
+
+    private void NavigateMePage()
+    {
+        NavigationManager.NavigateTo("/me");
+    }
+
+    private void NavigateLoginPage()
+    {
+        NavigationManager.NavigateTo("/login");
+    }
+
+    private void NavigateLogoutPage()
+    {
+        NavigationManager.NavigateTo("/logout");
+    }
+
+    private void NavigateCreateEntryPage()
+    {
+        NavigationManager.NavigateTo("/createEntry");
+    }
+    private async Task SearchKeyDown(KeyboardEventArgs e)
+    {
+        if (e.Code=="Enter"|| e.Code=="NumpadEnter")
+        {
+            await Search();
+        }
+    }
+
+    private async Task OnSearchFocusOut()
+    {
+        await Task.Delay(100);
+        if (showSearchResult)
+            showSearchResult = false;
+    }
+
+    private async Task Search()
+    {
+        if (string.IsNullOrEmpty(searchText))
+            return;
+        searchResult = await EntryService.SearchBySubject(searchText);
+        showSearchResult = true;
+        searchText = string.Empty;
+    }
+
+    private async Task GoEntry(Guid entryId)
+    {
+        await OnSearchFocusOut();
+        NavigationManager.NavigateTo($"/entry/{entryId}");
+    }
+
+
+}

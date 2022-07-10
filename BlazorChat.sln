@@ -21,23 +21,23 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "WebApi", "WebApi", "{D461C9
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "BlazorWeb", "BlazorWeb", "{EC8B35D1-E88D-4561-A7C8-1BB61E1E6B25}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorChat.Common", "src\Commons\BlazorChat.Common\BlazorChat.Common\BlazorChat.Common.csproj", "{5685827B-DDA9-4FCF-8524-E90F67929DA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorChat.Common", "src\Commons\BlazorChat.Common\BlazorChat.Common\BlazorChat.Common.csproj", "{5685827B-DDA9-4FCF-8524-E90F67929DA5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorChat.Api.Domain", "src\Api\Core\BlazorChat.Api.Domain\BlazorChat.Api.Domain.csproj", "{DF44CA37-AA99-4E9D-A86E-9BCD14060E21}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorChat.Api.Domain", "src\Api\Core\BlazorChat.Api.Domain\BlazorChat.Api.Domain.csproj", "{DF44CA37-AA99-4E9D-A86E-9BCD14060E21}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorChat.Api.Application", "src\Api\Core\BlazorChat.Api.Application\BlazorChat.Api.Application.csproj", "{648F2E47-4B0D-4391-9E50-B0A1035D525D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorChat.Api.Application", "src\Api\Core\BlazorChat.Api.Application\BlazorChat.Api.Application.csproj", "{648F2E47-4B0D-4391-9E50-B0A1035D525D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorChat.Api.WebApi", "src\Api\WebApi\BlazorChat.Api.WebApi\BlazorChat.Api.WebApi.csproj", "{66D221CC-CE75-4242-8E0C-227FF49FF3AB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorChat.Api.WebApi", "src\Api\WebApi\BlazorChat.Api.WebApi\BlazorChat.Api.WebApi.csproj", "{66D221CC-CE75-4242-8E0C-227FF49FF3AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorChat.Api.Infrastructure.Persistence", "src\Api\Infrastructure\BlazorChat.Api.Infrastructure.Persistence\BlazorChat.Api.Infrastructure.Persistence.csproj", "{2AD9ECEA-69B0-4F8B-AA02-B4205D1FBC47}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorChat.Api.Infrastructure.Persistence", "src\Api\Infrastructure\BlazorChat.Api.Infrastructure.Persistence\BlazorChat.Api.Infrastructure.Persistence.csproj", "{2AD9ECEA-69B0-4F8B-AA02-B4205D1FBC47}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorChat.Projections.FavoriteService", "src\Projections\BlazorChat.Projections.FavoriteService\BlazorChat.Projections.FavoriteService.csproj", "{CE11D149-3940-4E9F-9200-15E6B52DCF14}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorChat.Projections.FavoriteService", "src\Projections\BlazorChat.Projections.FavoriteService\BlazorChat.Projections.FavoriteService.csproj", "{CE11D149-3940-4E9F-9200-15E6B52DCF14}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorChat.Client.Web", "src\Clients\BlazorWeb\BlazorChat.Client.Web\BlazorChat.Client.Web.csproj", "{F0F34ABD-FF06-4912-A4F3-57F59E67FA11}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorChat.Client.Web", "src\Clients\BlazorWeb\BlazorChat.Client.Web\BlazorChat.Client.Web.csproj", "{F0F34ABD-FF06-4912-A4F3-57F59E67FA11}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorChat.Projections.VoteService", "src\Projections\BlazorChat.Projections.VoteService\BlazorChat.Projections.VoteService.csproj", "{6AB7BEA3-6C09-4147-AD33-E8E46DE809F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorChat.Projections.VoteService", "src\Projections\BlazorChat.Projections.VoteService\BlazorChat.Projections.VoteService.csproj", "{6AB7BEA3-6C09-4147-AD33-E8E46DE809F6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorChat.Projections.UserService", "src\Projections\BlazorChat.Projections.UserService\BlazorChat.Projections.UserService.csproj", "{DDAF3C89-78BA-4477-AA59-BBC83BB9B5F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorChat.Projections.UserService", "src\Projections\BlazorChat.Projections.UserService\BlazorChat.Projections.UserService.csproj", "{DDAF3C89-78BA-4477-AA59-BBC83BB9B5F4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

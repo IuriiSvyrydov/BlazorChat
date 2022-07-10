@@ -23,7 +23,7 @@ namespace BlazorChat.Client.Web.Client
                 var clientFactory = sp.GetRequiredService<IHttpClientFactory>();
                 return clientFactory.CreateClient("WebApiClient");
             });
-            builder.Services.AddTransient<IVoteService, VoteService>();
+            builder.Services.AddTransient<IEntryService, EntryService>();
             builder.Services.AddTransient<IVoteService, VoteService>();
             builder.Services.AddTransient<IFavService, FavService>();
             builder.Services.AddTransient<IUserService, UserService>();
