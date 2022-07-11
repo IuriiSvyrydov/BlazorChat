@@ -19,13 +19,15 @@
 .top-nav {
     margin-top: 10px;
     position: absolute;
+    top: 0;
     right: 100px;
     width: 30%;
+    height: 30px;
     display: flex;
     justify-content: right;
 }
 a.top-nav-item:hover {
-    cursor: pointer;
+    cursor: pointer; 
     color: #80be4a;
     text-decoration: underline;
 }
@@ -34,9 +36,9 @@ a.top-nav-item:hover {
     left: 350px;
     position: absolute;
     top: 0;
-    width: 250px;
+    width: 400px;
     height: 50px;
-}
+} 
 .search-box>ul>li>a {
     cursor: pointer;
 }
@@ -106,6 +108,9 @@ a.more-data:hover {
     -webkit-overflow-scrolling: touch;
     z-index: 1;
 }
+/*.sidebar {
+    background-image: linear-gradient(180deg,rgb(5,39,103)0%,#3a0647 70%)
+}*/
 .sidebar::-webkit-scrollbar {
     width: 10px;
 }

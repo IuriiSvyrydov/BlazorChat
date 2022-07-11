@@ -14,7 +14,7 @@ namespace BlazorChat.Api.WebApi
                 {
                     opt.JsonSerializerOptions.PropertyNamingPolicy = null;
                 })
-                .AddFluentValidation();
+                .AddFluentValidation().ConfigureApiBehaviorOptions(o=>o.SuppressModelStateInvalidFilter = true);
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.ConfigureAuth(builder.Configuration);

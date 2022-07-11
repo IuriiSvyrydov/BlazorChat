@@ -5,12 +5,14 @@ using BlazorChat.Api.Application.Features.Commands.User.ComfirmEmail;
 using BlazorChat.Common.Events.User;
 using BlazorChat.Common.Models.RequestModel;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlazorChat.Api.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+  
     public class UserController : BaseController
     {
         private readonly IMediator _mediator;
@@ -38,6 +40,7 @@ namespace BlazorChat.Api.WebApi.Controllers
 
         [HttpPost]
         [Route("login")]
+        
         public async Task<IActionResult> Login([FromBody] LoginUserCommand user)
         {
             var res = await _mediator.Send(user);
@@ -45,6 +48,7 @@ namespace BlazorChat.Api.WebApi.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> CreateUser([FromBody] CreateUserCommand user)
         {
             var guid = await _mediator.Send(user);
@@ -53,6 +57,7 @@ namespace BlazorChat.Api.WebApi.Controllers
 
         [HttpPost]
         [Route("Update")]
+        [Authorize]
         public async Task<IActionResult> UpdateUser([FromBody] UpdateUserCommand user)
         {
             var guid = await _mediator.Send(user);
@@ -72,6 +77,7 @@ namespace BlazorChat.Api.WebApi.Controllers
 
         [HttpPost]
         [Route("ChangePassword")]
+        [Authorize]
         public async Task<IActionResult> ChangePassword([FromBody] ChangeUserPasswordCommand command)
         {
             if (!command.UserId.HasValue)

@@ -8,6 +8,7 @@ using BlazorChat.Api.Application.Features.Queries.GetEntries;
 using BlazorChat.Common.Models.Queries;
 using BlazorChat.Common.Models.RequestModel;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,6 +16,7 @@ namespace BlazorChat.Api.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+
     public class EntryController : BaseController
     {
         private readonly IMediator _mediator;
@@ -55,6 +57,7 @@ namespace BlazorChat.Api.WebApi.Controllers
 
         [HttpGet]
         [Route("UserEntries")]
+        [Authorize]
         public async Task<IActionResult> GetUserEntries(string userName, Guid userId,int page,
             int pageSize)
         {
@@ -73,6 +76,7 @@ namespace BlazorChat.Api.WebApi.Controllers
         }
         [HttpPost]
         [Route("CreateEntry")]
+        [Authorize]
         public async Task<IActionResult> CreateEntry([FromBody] CreateEntryCommand command)
         {
             if (!command.CreateById.HasValue)
@@ -82,6 +86,7 @@ namespace BlazorChat.Api.WebApi.Controllers
         }
         [HttpPost]
         [Route("CreateEntryComment")]
+        [Authorize]
         public async Task<IActionResult> CreateEntryComment([FromBody] CreateEntryCommentCommand command)
         {
             if (!command.CreateById.HasValue)

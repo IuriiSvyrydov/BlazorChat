@@ -6,6 +6,10 @@ namespace BlazorChat.Common.Infrastructure.Results
 {
     public class ValidationResponseModel
     {
+        public ValidationResponseModel()
+        {
+            
+        }
         public ValidationResponseModel(IEnumerable<string> errors)
         {
             Errors = errors;

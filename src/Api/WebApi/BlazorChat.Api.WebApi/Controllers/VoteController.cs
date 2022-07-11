@@ -5,6 +5,7 @@ using BlazorChat.Api.Application.Features.Commands.Entry.DeleteVote;
 using BlazorChat.Common.Models;
 using BlazorChat.Common.Models.RequestModel;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -12,6 +13,7 @@ namespace BlazorChat.Api.WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class VoteController : BaseController
     {
         private readonly IMediator _mediator;
