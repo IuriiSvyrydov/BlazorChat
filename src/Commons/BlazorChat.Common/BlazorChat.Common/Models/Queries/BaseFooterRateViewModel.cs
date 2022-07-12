@@ -7,6 +7,7 @@ public class BaseFooterRateViewModel:BaseFooterFavoritedViewModel
 
 public class BaseFooterFavoritedViewModel
 {
+    public int Count { get; set; }
     public bool IsFavorited { get; set; }
     public int FavoritedCount { get; set; }
 }

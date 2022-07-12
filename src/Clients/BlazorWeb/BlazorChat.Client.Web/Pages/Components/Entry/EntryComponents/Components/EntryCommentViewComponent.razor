@@ -1,0 +1,71 @@
+﻿@using BlazorChat.Client.Web.Infrastructure.Models
+@using BlazorChat.Common.Models
+@if (EntryComment != null)
+{
+    <div class="card border-0">
+        <div class="card-body  col-md-12">
+            
+            <p class="entry-content">@EntryComment.Content</p>
+           
+                <EntryFooterFavoriteComponent EntryId="EntryComment.Id"
+                                              OnFavClicked="@OnFavClicked"
+                                              FavoritedCount="@EntryComment.FavoritedCount"
+                                              IsFavorited="@EntryComment.IsFavorited"/>
+            
+           
+            <EntryFooterAuthorComponent UserName="@EntryComment.CreatedByUserName"
+                                        CreateDate="@EntryComment.CreatedDate"/>
+        </div>
+    </div>
+}
+@code {
+
+    [Parameter]
+    public GetEntryCommentsViewModel EntryComment { get; set; } = new();
+   
+    [Inject] IVoteService VoteService { get; set; }
+    [Inject] IFavService FavService { get; set; }
+
+    private async Task OnFavClicked(FavClickedEventArgs args)
+    {
+        if (args.IsFaved)
+        {
+            await FavService.CreateEntryFav(args.EntryId);
+            EntryComment.IsFavorited = true;
+            EntryComment.FavoritedCount++;
+        }
+        else
+        {
+            await FavService.DeleteEntryFav(args.EntryId);
+            EntryComment.IsFavorited = false;
+            EntryComment.FavoritedCount--;    
+        }
+        StateHasChanged();
+    }
+
+    public async Task OnVoteClicked(VoteClickedEventArgs args)
+    {
+        if (args.UpVoteDeleted || args.DownVoteDeleted)
+        {
+            await VoteService.DeleteEntryVote(args.EntryId);
+            EntryComment.VoteType = VoteType.None;
+            return;
+            
+        }
+        if (args.IsUpVoteClicked)
+        {
+            await VoteService.CreateEntryVote(args.EntryId,VoteType.UpVote);
+            EntryComment.VoteType = VoteType.UpVote;
+            return;
+        }
+        else if (args.IsDownVoteClicked)
+        {
+            await VoteService.CreateEntryVote(args.EntryId, VoteType.DownVote);
+            EntryComment.VoteType = VoteType.DownVote;
+            return;
+            
+        }
+       
+
+    }
+}

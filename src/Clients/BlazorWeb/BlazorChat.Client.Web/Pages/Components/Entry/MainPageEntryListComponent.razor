@@ -1,0 +1,20 @@
+﻿@if (entries != null)
+{
+    foreach (var entry in entries.Results)
+    {
+        <EntryViewerComponent Entry="@entry"/>
+        <br/>
+    }
+}
+
+@code {
+    [Inject]
+    IEntryService EntryService { get; set; }
+
+    PageViewModel<GetEntryDetailViewModel> entries;
+    protected override async Task OnInitializedAsync()
+    {
+        entries = await EntryService.GetMainPageEntries(1, 20);
+    }
+
+}

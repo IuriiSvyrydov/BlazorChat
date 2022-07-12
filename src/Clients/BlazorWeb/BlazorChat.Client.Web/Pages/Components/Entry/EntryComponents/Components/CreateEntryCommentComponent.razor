@@ -1,0 +1,26 @@
+﻿<EditForm Model="@_command" OnInvalidSubmit="@CreateEntryComment">
+    <div class="entry-comment-add-container">
+        <div class="entry-comment-add">
+            <InputTextArea>
+
+            </InputTextArea>
+        </div>
+    </div>
+</EditForm>
+@code {
+    [Parameter]
+    public Guid? EntryId { get; set; }
+    [Parameter]
+    public string EntrySubject { get; set; }
+
+    private string placeHolderText => $"tell us something about'{EntrySubject}'";
+    private CreateEntryCommentCommand _command = new CreateEntryCommentCommand();
+    private EventCallback<CreateEntryCommentCommand> OnClicked { get; set; }
+
+    public async Task CreateEntryComment()
+
+    {
+        _command.EntryId = EntryId;
+        await OnClicked.InvokeAsync();
+    }
+}

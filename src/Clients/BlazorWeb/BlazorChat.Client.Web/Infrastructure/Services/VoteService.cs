@@ -42,7 +42,7 @@ namespace BlazorChat.Client.Web.Infrastructure.Services
             await CreateEntryCommentVote(entryCommentId, VoteType.DownVote);
         }
 
-        private async Task<HttpResponseMessage> CreateEntryVote(Guid entryId,VoteType voteType =VoteType.UpVote )
+        public async Task<HttpResponseMessage> CreateEntryVote(Guid entryId,VoteType voteType =VoteType.UpVote )
         {
             var result = await _httpClient.PostAsync($"/api/vote/entry/{entryId}?voteType={voteType}", null);
             //TODO check success

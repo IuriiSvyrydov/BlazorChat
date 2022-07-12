@@ -1,0 +1,60 @@
+﻿@using BlazorChat.Common.Models
+@using BlazorChat.Client.Web.Infrastructure.Models
+<div class="container">
+    <span>
+        <a class="p-1" title="Up Vote">
+            <span class="oi oi-arrow-top entry-vote @(VoteType == VoteType.UpVote ? "text-success":"text-secondary")"
+                  @onclick="(()=>UpClicked())"></span>
+        </a>
+        <a class="p-3" title="Up Down">
+            <span class="oi oi-arrow-bottom entry-vote @(VoteType == VoteType.DownVote ? "text-danger":"text-secondary")"
+                  @onclick="(()=>DownClicked())"></span>
+        </a>
+        <EntryFooterFavoriteComponent  EntryId="@EntryId"
+                                       FavoritedCount="@FavoritedCount"
+                                       IsFavorited="@IsFavorited"
+                                       OnFavClicked="@FavoritedClicked"/>
+       
+
+    </span>
+</div>
+
+@code {
+    [Parameter]public VoteType VoteType { get; set; }
+    [Parameter]public EventCallback<FavClickedEventArgs>OnFaveClicked { get; set; }
+    [Parameter]public EventCallback<VoteClickedEventArgs>OnVoteClicked { get; set; }
+    [Parameter]public  bool IsFavorited { get; set; }
+    [Parameter]public  int FavoritedCount { get; set; } = 0;
+    [Parameter]public Guid EntryId { get; set; }
+
+    public async Task DownClicked()
+    {
+        var dc = new VoteClickedEventArgs();
+        dc.EntryId = EntryId;
+        dc.DownVoteDeleted = VoteType == VoteType.DownVote;
+        dc.IsDownVoteClicked = true;
+        await OnVoteClicked.InvokeAsync(dc);
+        StateHasChanged();
+    }
+
+    public async Task FavoritedClicked()
+    {
+        var dc = new FavClickedEventArgs();
+        dc.EntryId = EntryId;
+        dc.IsFaved = !IsFavorited;
+        await OnFaveClicked.InvokeAsync(dc);
+        StateHasChanged();
+
+    }
+
+    public async Task UpClicked()
+    {
+        var dc = new VoteClickedEventArgs();
+        dc.EntryId = EntryId;
+        dc.UpVoteDeleted = VoteType == VoteType.UpVote;
+        dc.IsUpVoteClicked = true;
+        await OnVoteClicked.InvokeAsync(dc);
+        StateHasChanged();
+
+    }
+}
