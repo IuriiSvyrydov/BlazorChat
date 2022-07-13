@@ -11,6 +11,11 @@ h1:focus {
 a, .btn-link {
     color: #0071c1;
 }
+.btn-primary {
+    color: #fff;
+    background-color: #1b6ec2;
+    border-color: #1861ac;
+}
 a {
     text-decoration: none;
     color: #bdbdbd;
@@ -37,8 +42,7 @@ label {
     background-color: #5c8e31;
 
 }
-.btn-succe
-ss.btn-chat:focus,:active {
+.btn-success.btn-chat:focus,:active {
     box-shadow: none;
 }
 .btn-primary {
@@ -106,7 +110,7 @@ ss.btn-chat:focus,:active {
         background-color: #2d2d2d;
     }
 .entry-date a:hover, a:focus {
-    cursor: pointer;
+    
     cursor: auto;
     text-decoration: none;
 } 

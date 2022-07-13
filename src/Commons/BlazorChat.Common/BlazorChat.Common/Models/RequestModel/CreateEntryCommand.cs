@@ -8,6 +8,10 @@ public class CreateEntryCommand: IRequest<Guid>
     public string Content { get; set; }
     public Guid? CreateById { get; set; }
 
+    public CreateEntryCommand()
+    {
+        
+    }
     public CreateEntryCommand(string subject, string content, Guid? createById)
     {
         Subject = subject;

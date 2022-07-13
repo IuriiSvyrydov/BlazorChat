@@ -11,7 +11,8 @@
     top: 0;
     left: 100px;
     width: 30%;
-    display: flex;justify-content: left;
+    display: flex;
+    justify-content: left;
     cursor: pointer;
     width: 180px;
     margin-bottom: 10px;
@@ -42,9 +43,6 @@ a.top-nav-item:hover {
 .search-box>ul>li>a {
     cursor: pointer;
 }
-.search-result {
-
-}
 .sub-nav {
     margin-left: auto;
     margin-right: auto;
@@ -64,6 +62,7 @@ a.sub-nav-item {
 a.sub-nav-item:hover,a.sub-nav-item.active {
     cursor: pointer;
     color: #88be4a;
+    border-color: #80be4a;
     border-bottom: solid;
     transition: all .2s ease-in-out;
 }
@@ -111,6 +110,11 @@ a.more-data:hover {
 /*.sidebar {
     background-image: linear-gradient(180deg,rgb(5,39,103)0%,#3a0647 70%)
 }*/
+.sidebar::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+
+}
 .sidebar::-webkit-scrollbar {
     width: 10px;
 }
@@ -144,7 +148,7 @@ a.more-data:hover {
 }
 @media(min-width: 641px) {
     .page {
-        flex-direction: row;
+         flex-direction: row;
     }
     .sidebar {
         width: 250px;

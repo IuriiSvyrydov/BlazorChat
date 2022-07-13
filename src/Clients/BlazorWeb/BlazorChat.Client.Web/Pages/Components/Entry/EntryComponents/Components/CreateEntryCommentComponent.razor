@@ -1,9 +1,12 @@
 ﻿<EditForm Model="@_command" OnInvalidSubmit="@CreateEntryComment">
     <div class="entry-comment-add-container">
         <div class="entry-comment-add">
-            <InputTextArea>
+            <InputTextArea @bind-value="@_command.Content" class="entry-comment-textarea"/>
+            <div class="entry-comment-actions">
+                <input type="submit" class="btn btn-success btn-chat" value="send"/>
+            </div>
 
-            </InputTextArea>
+            
         </div>
     </div>
 </EditForm>
@@ -14,13 +17,16 @@
     public string EntrySubject { get; set; }
 
     private string placeHolderText => $"tell us something about'{EntrySubject}'";
-    private CreateEntryCommentCommand _command = new CreateEntryCommentCommand();
-    private EventCallback<CreateEntryCommentCommand> OnClicked { get; set; }
+    private CreateEntryCommentCommand _command = new ();
+    [Parameter]
+    public EventCallback<CreateEntryCommentCommand> OnClicked { get; set; }
 
     public async Task CreateEntryComment()
 
     {
         _command.EntryId = EntryId;
-        await OnClicked.InvokeAsync();
+        await OnClicked.InvokeAsync(_command);
+        _command = new CreateEntryCommentCommand();
+
     }
 }
