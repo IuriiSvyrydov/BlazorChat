@@ -1,4 +1,4 @@
-﻿<EditForm Model="@_command" OnInvalidSubmit="@CreateEntryComment">
+﻿<EditForm Model="@_command" OnValidSubmit="CreateEntryComment">
     <div class="entry-comment-add-container">
         <div class="entry-comment-add">
             <InputTextArea @bind-value="@_command.Content" class="entry-comment-textarea"/>

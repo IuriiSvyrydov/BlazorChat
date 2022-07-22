@@ -4,9 +4,9 @@
 <div class="login-container">
     <div class="row justify-content-center align-items-start h-100">
         <div class="login-form">
-            <EditForm Model="@_loginUserCommand" OnInvalidSubmit="LoginProcess">
-                <DataAnnotationsValidator/>
-                @if (errorText != string.Empty)
+            <EditForm Model="@_loginUserCommand" OnValidSubmit="LoginProcess">
+@*                <DataAnnotationsValidator/>
+*@                @if (errorText != string.Empty)
                 {
                     <span class="text-danger">@errorText</span>
                     <br/>
@@ -39,10 +39,10 @@
         try
         {
             var res = await IdentityService.Login(_loginUserCommand);
-            Console.WriteLine("Clicked");
+          
             if (res)
             {
-                errorText = "";
+                //errorText = "";
                 NavigationManager.NavigateTo("/");
             }
             else

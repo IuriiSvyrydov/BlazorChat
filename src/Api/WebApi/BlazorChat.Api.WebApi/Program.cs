@@ -40,6 +40,7 @@ namespace BlazorChat.Api.WebApi
             app.UseHttpsRedirection();
             app.UseAuthentication();
             app.UseAuthorization();
+            app.MapDefaultControllerRoute();
             app.MapControllers();
 
             app.Run();

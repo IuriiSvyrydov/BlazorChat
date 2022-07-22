@@ -1,0 +1,154 @@
+﻿@using Blazored.LocalStorage
+@using BlazorChat.Common.Exceptions
+@if (_userDetail is not  null)
+{
+    <h1 class="text-white">@_userDetail.UserName</h1>
+}
+@if (isMyProfile)
+{
+    <br/>
+    <input type="button" class="form-control btn btn-success btn-chat" value="Change Details" @onclick="(() =>showForm =!showForm) " />
+}
+@if (showForm)
+{
+    <br/>
+    <br/>
+    <EditForm Model =  "@_userDetail" OnInvalidSubmit="OnSaveClicked">
+        <div class="form-row">
+            <div class="col-auto">
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">User Name</div>
+                    </div>
+                    <InputText @bind-Value="@_userDetail.UserName" class="form-control" placeholder="Nick"/>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-auto">
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">First Name</div>
+                    </div>
+                    <InputText @bind-Value="@_userDetail.FirstName" class="form-control" placeholder="First Name"/>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-auto">
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Last Name</div>
+                    </div>
+                    <InputText @bind-Value="@_userDetail.LastName" class="form-control" placeholder="Last Name"/>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-auto">
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">Email Address</div>
+                    </div>
+                    <InputText @bind-Value="@_userDetail.EmailAddress" class="form-control" placeholder="Email Address"/>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class=" form-control btn-success m-auto ">Save</button>
+        <br/>
+        <br/>
+        <input type="button" class="form-control btn-dark bg-gradient" value="Change Password"@onclick="(()=>showChangePasswordSection =!showChangePasswordSection)"/>
+        @if (showChangePasswordSection)
+        {
+            @if (changePasswordErrorText != string.Empty)
+            {
+                <span class="text-danger">@changePasswordErrorText</span>
+                <br/>
+            }
+            <div class="form-row">
+                <div class="col-auto">
+                    <InputText @bind-Value="@oldPassword" class="form-control" placeholder="Old Password"/>
+                    <InputText @bind-Value="@newPassword" class="form-control" placeholder="New Password"/>
+                    <br/>
+                    <input type="button" class="form-control btn-success btn-chat" value="Save" @onclick="@ChangePassword"/>
+                </div>
+            </div>
+        }
+    </EditForm>
+}
+
+@code {
+    [Parameter]
+    public Guid UserId  { get; set; }
+    [Parameter] public string UserName { get; set; }
+    [Inject]
+    ILocalStorageService LocalStorageService { get; set; }
+    [Inject]AuthenticationStateProvider AuthenticationStateProvider { get; set; }
+    [Inject]NavigationManager NavigationManager { get; set; }
+    [Inject]
+    IUserService UserService { get; set; }
+
+    private UserDetailViewModel _userDetail = new();
+    private bool showForm;
+    private bool isMyProfile;
+    private string changePasswordErrorText;
+    private string oldPassword;
+    private string newPassword;
+    private string emailBeforeChange;
+    private bool showChangePasswordSection;
+    protected override async Task OnInitializedAsync()
+    {
+
+        if (!string.IsNullOrEmpty(UserName))
+        {
+            _userDetail = await UserService.GetUserDetail(UserName);
+        }
+        else
+        {
+            if (UserId==Guid.Empty&& string.IsNullOrEmpty(UserName))
+            {
+                UserId = await AuthenticationStateProvider.GetUserId(); 
+            }
+            _userDetail = await UserService.GetUserDetail(UserId);
+        }
+        emailBeforeChange = _userDetail.EmailAddress;
+        var myUserName = await LocalStorageService.GetUserName();
+        var myUserId = await LocalStorageService.GetUserId();
+        isMyProfile = _userDetail.UserName == myUserName || myUserId == _userDetail.Id;
+    }
+
+    public async Task OnSaveClicked()
+    {
+        var success = await UserService.UpdateUser(_userDetail);
+
+        if (emailBeforeChange!= _userDetail.EmailAddress)
+        {
+            NavigationManager.NavigateTo("/logout");
+        }
+        if (success)
+        {
+            showForm = false;
+        }
+    }
+
+    public async Task ChangePassword()
+    {
+        if (string.IsNullOrEmpty(oldPassword)|| string.IsNullOrEmpty(newPassword))
+        {
+            changePasswordErrorText = "Please enter old and new password";
+            return;
+        }
+        try
+        {
+            var success = await UserService.ChangeUserPassword(oldPassword, newPassword);
+            if (success)
+                showChangePasswordSection = false;
+        }
+        catch (DataBaseValidationException ex)
+        {
+            changePasswordErrorText = ex.Message;
+        }
+    }
+ 
+
+}

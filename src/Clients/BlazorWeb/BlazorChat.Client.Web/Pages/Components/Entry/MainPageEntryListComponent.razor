@@ -5,16 +5,30 @@
         <EntryViewerComponent Entry="@entry"/>
         <br/>
     }
+    <br/>
+    <br/>
+    <PaginationComponent TotalPage="@entries.PageInfo.TotalCount"
+                         CurrentPage="@currentPage"
+                         OnPageChanged="@OnPageChanged"/>
 }
 
 @code {
     [Inject]
     IEntryService EntryService { get; set; }
 
+    private int currentPage = 1;
+
     PageViewModel<GetEntryDetailViewModel> entries;
+
+    public async Task OnPageChanged(int pageNumber)
+    {
+        currentPage = pageNumber;
+        entries = await EntryService.GetMainPageEntries(currentPage, 5);
+    }
     protected override async Task OnInitializedAsync()
     {
-        entries = await EntryService.GetMainPageEntries(1, 20);
+        entries = await EntryService.GetMainPageEntries(currentPage, 5);
+
     }
 
 }

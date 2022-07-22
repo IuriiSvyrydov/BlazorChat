@@ -46,7 +46,7 @@ namespace BlazorChat.Client.Web.Infrastructure.Services
         public async Task<bool> Login(LoginUserCommand command)
         {
             string responseStr;
-            var httpResponse = await _httpClient.PostAsJsonAsync("/", command);
+            var httpResponse = await _httpClient.PostAsJsonAsync("/api/User/login", command);
             if (httpResponse!=null&& !httpResponse.IsSuccessStatusCode)
             {
                 if (httpResponse.StatusCode==HttpStatusCode.BadRequest)

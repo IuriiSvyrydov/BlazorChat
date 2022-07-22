@@ -36,7 +36,7 @@ public class AuthStateProvider:AuthenticationStateProvider
             new Claim(ClaimTypes.Name,userName),
             new Claim(ClaimTypes.NameIdentifier,userId.ToString())
 
-        }, "jwtAuthType"));
+        }, "jwtAuthType"));  
         var authState = Task.FromResult(new AuthenticationState(cp)); 
         NotifyAuthenticationStateChanged(authState);
     }
